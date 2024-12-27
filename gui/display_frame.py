@@ -118,6 +118,5 @@ class DisplayFrame(CTkFrame):
     def on_show(self):
         self.update_content()
 
->>>>>>> bd275b39a472c1a4b6f26ae6b0e247d726b4ae94
     def switch_to_login(self):
         self.parent.frame_manager.switch_to("login")
