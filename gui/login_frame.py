@@ -90,7 +90,14 @@ class LoginFrame(CTkFrame):
 
         if username == self.ADMIN_USER and password == self.ADMIN_PASSWORD:
             self.error_label.configure(text="", text_color="green")
-            self.parent.frame_manager.switch_to("admin")
             print("Login successful")
+            self.parent.frame_manager.switch_to("admin")
+            self.clear_form()
         else:
             self.error_label.configure(text="Invalid username or password", text_color="red")
+
+    def clear_form(self):
+        """Clear the username, password, and error label."""
+        self.user_entry.delete(0, 'end')
+        self.password_entry.delete(0, 'end')
+        self.error_label.configure(text="")
