@@ -1,10 +1,10 @@
-from tkinter import Tk, PhotoImage
+import customtkinter as ctk
 import ctypes
 
-# from .login_frame import LoginFrame
-from .admin_frame import AdminFrame
+from .utils.frame_manager import FrameManager
 
-import customtkinter as ctk
+from .admin_frame import AdminFrame
+from.login_frame import LoginFrame
 
 # -----------------------------------------------------
 #
@@ -26,6 +26,8 @@ class RootWindow:
         self.root.title("Hospital Kiosk")
         self.root.iconbitmap('gui/images/hospital-logo.ico')
 
+        self.frame_manager = FrameManager(self.root)
+
         self.root.geometry(RootWindow.CenterWindowToDisplay(self.root, 1200, 700, self.root._get_window_scaling()))
         self.init_frames()
     
@@ -44,7 +46,12 @@ class RootWindow:
 
     def init_frames(self):
         self.admin_frame = AdminFrame(self, self.hospital_queue)
-        self.admin_frame.pack(fill="both", expand=True)
+        self.login_frame = LoginFrame(self)
+        self.frame_manager.add_frame("login", self.login_frame)
+        self.frame_manager.add_frame("admin", self.admin_frame)
+
+        self.frame_manager.switch_to("login")
+        #self.admin_frame.pack(fill="both", expand=True)
         #self.login_frame = LoginFrame(self.root, self.auth, self.switch_to_dashboard)
         #self.frame_manager.add_frame("login", self.login_frame)
         #self.frame_manager.switch_to("login")

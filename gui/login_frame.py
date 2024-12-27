@@ -18,7 +18,7 @@ class LoginFrame(ctk.CTkFrame):
         self.logo_frame.pack(side="left", padx=0)
 
         # Logo image (use Pillow to load the image)
-        self.logo_pil = Image.open("app/images/hospital-logo.png")
+        self.logo_pil = Image.open("gui/images/hospital-logo.png")
         self.logo_pil = self.logo_pil.resize((350, 350))
         self.logo_img = ImageTk.PhotoImage(self.logo_pil)
 
