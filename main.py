@@ -1,4 +1,4 @@
-from src.hospital_queue import HospitalQueue
+from src.modules.hospital_queue import HospitalQueue
 
 def display_menu():
     """
