@@ -4,13 +4,17 @@ class Patient:
     - name: str = name of the patient
     - severity: int = starting with 1 indicating low severity, e.g, low priority
     - arrival_time: str = datetime object of when the patient arrives
-    - line_number: int = patient's position in the queue
+    - patient_id: int = a unique ID for the patient (starting from 100)
     '''
-    def __init__(self, name: str, severity: int, arrival_time: object, line_number: int):
+
+    _id_counter = 100  # Class-level counter to generate unique patient IDs
+
+    def __init__(self, name: str, severity: int, arrival_time: object):
         self.name: str = name
         self.severity: int = severity
         self.arrival_time: int = arrival_time
-        self.line_number: int = line_number
+        self.patient_id: int = Patient._id_counter  # Assign the next available ID
+        Patient._id_counter += 1  # Increment the counter for the next patient
 
     def __lt__(self, other):
         """Define the less-than comparison for sorting by severity (lower severity first)."""
@@ -37,4 +41,4 @@ class Patient:
         return (-self.severity, self.arrival_time)
 
     def __str__(self):
-        return f"{self.name} (Severity: {self.severity}, Arrival: {self.arrival_time})"
+        return f"{self.name} (Severity: {self.severity}, Arrival: {self.arrival_time}) ID: {self.patient_id})"

@@ -12,12 +12,10 @@ class HospitalQueue:
     def add_patient(self, name, severity):
         """
         Add a patient to the queue, with an auto-incremented arrival time.
-        After adding the patient, assign their line number based on their position in the queue.
         """
         arrival_time = datetime.now()
-        patient = Patient(name, severity, arrival_time, 0)  # Initial line_number is set to 0 temporarily
+        patient = Patient(name, severity, arrival_time)  # No need for line_number here
         heapq.heappush(self.queue, (patient.get_priority(), patient))
-        self._assign_line_numbers()  # Assign line numbers based on the queue position
         print(f"Patient added: {patient}")
 
     def remove_patient(self):
@@ -29,7 +27,6 @@ class HospitalQueue:
             return None
 
         _, attended = heapq.heappop(self.queue)
-        self._assign_line_numbers()  # Reassign line numbers after removal
         print(f"Attending to: {attended}")
         return attended
 
@@ -87,12 +84,4 @@ class HospitalQueue:
         # Update severity and reinsert
         patient.severity = new_severity
         heapq.heappush(self.queue, (patient.get_priority(), patient))
-        self._assign_line_numbers()  # Reassign line numbers after re-insertion
         print(f"Updated severity for {patient.name} to {new_severity}")
-
-    def _assign_line_numbers(self):
-        """
-        Helper function to assign line numbers to patients based on their position in the queue.
-        """
-        for i, (_, patient) in enumerate(self.queue):
-            patient.line_number = i + 1  # Assign line number (1-based index)
