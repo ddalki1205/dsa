@@ -89,14 +89,15 @@ class DisplayFrame(CTkFrame):
 
         self.display_button = CTkButton(
             self,
-            text="login",
+            text="",
             command=self.switch_to_login,
-            fg_color="navy",
+            fg_color="#14375e",
             height=10000,
-            width=75,
-            bg_color="navy",
+            width=60,
+            bg_color="#14375e",
+            anchor="s"
         )
-        self.display_button.place(relx=.97, rely=0.5, anchor="center")
+        self.display_button.place(relx=0.02, rely=0.5, anchor="center")
     
     def switch_to_login(self):
         self.parent.frame_manager.switch_to("login")

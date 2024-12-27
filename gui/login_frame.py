@@ -16,6 +16,15 @@ class LoginFrame(CTkFrame):
         self.main_frame = CTkFrame(self, fg_color="white")
         self.main_frame.pack(side="left", padx=200)
 
+        self.display_button = CTkButton(
+            self,
+            text="D\nI\nS\nP\nL\nA\nY",
+            command=self.switch_to_display,
+            fg_color="#14375e",
+            bg_color="#14375e",
+        )
+        self.display_button.pack(side="left", fill="both", expand=True)
+
         # logo frame
         self.logo_frame = CTkFrame(self.main_frame, fg_color="white")
         self.logo_frame.pack(side="left", padx=0)
@@ -70,16 +79,6 @@ class LoginFrame(CTkFrame):
 
         login_btn.pack(padx=2, pady=5, anchor="w")
         exit_btn.pack(padx=2, pady=5, anchor="w")
-
-        
-        self.display_button = CTkButton(
-            self,
-            text="display",
-            command=self.switch_to_display,
-            fg_color="navy",
-            bg_color="navy",
-        )
-        self.display_button.pack(side="bottom", fill="both", expand=True)
 
     def switch_to_display(self):
         self.parent.frame_manager.switch_to("display")
