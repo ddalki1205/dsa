@@ -1,3 +1,4 @@
+from CTkScrollableDropdown import CTkScrollableDropdown
 from customtkinter import *
 from PIL import Image, ImageTk, ImageOps, ImageDraw
 from CTkScrollableDropdown import *
@@ -45,6 +46,10 @@ class AdminFrame(CTkFrame):
 
         self.add_entry = CTkEntry(self.content_frame, text_color="black", bg_color="white", fg_color="white", font=("Segoe UI", 16), width=250, height=30)
         self.add_entry.pack(anchor="w", padx=50)
+
+        # Scrollable dropdown for severity
+        severity_button = CTkButton(self.content_frame, text="Choose Severity", font=("Segoe UI", 16, "bold"), width=250, height=6, border_spacing=5)
+        severity_button.pack(padx=50, pady=(15, 0), anchor="w")
 
         add_btn = CTkButton(self.content_frame, text="Add Patient", font=("Segoe UI", 16, "bold"), width=150, height=10, border_spacing=10, command="")
         add_btn.pack(padx=50, pady=(15,0), anchor="w")
