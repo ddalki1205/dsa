@@ -51,21 +51,3 @@ class RootWindow:
         self.frame_manager.add_frame("admin", self.admin_frame)
 
         self.frame_manager.switch_to("login")
-        #self.admin_frame.pack(fill="both", expand=True)
-        #self.login_frame = LoginFrame(self.root, self.auth, self.switch_to_dashboard)
-        #self.frame_manager.add_frame("login", self.login_frame)
-        #self.frame_manager.switch_to("login")
-
-    # def switch_to_login(self):
-    #     if self.frame_manager.frames.get("dashboard"):
-    #         self.frame_manager.remove_frame("dashboard")
-
-    #     self.frame_manager.switch_to("login")
-
-    # def switch_to_dashboard(self):
-    #     if self.frame_manager.frames.get("dashboard"):
-    #         self.frame_manager.remove_frame("dashboard")
-
-    #     self.dashboard_frame = DashboardFrame(self.root, self.auth, self.student_controller, self.frame_manager)
-    #     self.frame_manager.add_frame("dashboard", self.dashboard_frame)
-    #     self.frame_manager.switch_to("dashboard")
