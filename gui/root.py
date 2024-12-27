@@ -54,4 +54,4 @@ class RootWindow:
         self.frame_manager.add_frame("login", self.login_frame)
         self.frame_manager.add_frame("admin", self.admin_frame)
 
-        self.frame_manager.switch_to("admin")
+        self.frame_manager.switch_to("login")

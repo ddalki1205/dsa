@@ -2,6 +2,9 @@ import customtkinter as ctk
 from PIL import Image, ImageTk
 
 class LoginFrame(ctk.CTkFrame):
+    ADMIN_USER = "admin"
+    ADMIN_PASSWORD = "admin"
+    
     def __init__(self, parent):
         super().__init__(parent.root, fg_color="white", bg_color="white")
         self.parent = parent
@@ -67,4 +70,12 @@ class LoginFrame(ctk.CTkFrame):
         exit_btn.pack(padx=2, pady=5, anchor="w")
 
     def login_confirm(self):
-        pass
+        username = self.user_entry.get()
+        password = self.password_entry.get()
+
+        if username == self.ADMIN_USER and password == self.ADMIN_PASSWORD:
+            self.error_label.configure(text="", text_color="green")
+            self.parent.frame_manager.switch_to("admin")
+            print("Login successful")
+        else:
+            self.error_label.configure(text="Invalid username or password", text_color="red")
