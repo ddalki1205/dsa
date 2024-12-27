@@ -16,6 +16,8 @@ public functions for the hospital queue available to be used
     - where name is the patient's name in the program and the new_severity is the new integer between 1-10
 - **find_patient(name)**:
     - searches for the patient in the queue and returns them(as an object) or none if not found
+- **get_patients()**:
+    - returns a list of patients in the app sorted based on priority
 - **display_queue()**:
     - ONLY FOR THE TERMINAL
     - displays the queue based on priority
