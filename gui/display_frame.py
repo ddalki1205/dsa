@@ -71,7 +71,7 @@ class DisplayFrame(CTkFrame):
             bg_color="#14375e",
             anchor="s"
         )
-        self.display_button.place(relx=0.97, rely=0.5, anchor="center")
+        self.display_button.place(relx=0.02, rely=0.5, anchor="center")
 
     def update_content(self):
         # Clear existing widgets in Now Preparing and Now Serving frames
