@@ -232,7 +232,7 @@ class AdminFrame(CTkFrame):
         CTkLabel(patient_frame, text=str(patient.patient_id), text_color="white", font=("Segoe UI", 19, "bold"), width=160, anchor="n").grid(row=0, column=0, padx=10, pady=5)
         CTkLabel(patient_frame, text=patient.name, text_color="white", font=("Segoe UI", 19, "bold"), width=170, anchor="n").grid(row=0, column=1, padx=(56,5), pady=5)
         CTkLabel(patient_frame, text=str(patient.severity), text_color="white", font=("Segoe UI", 19, "bold"), width=170, anchor="n").grid(row=0, column=2, padx=(38, 10), pady=5)
-        CTkLabel(patient_frame, text=patient.arrival_time, text_color="white", font=("Segoe UI", 19, "bold"), width=170, anchor="n").grid(row=0, column=3, padx=(10, 20), pady=5)
+        CTkLabel(patient_frame, text=patient.arrival_time.strftime("%B %d, at %I:%M %p"), text_color="white", font=("Segoe UI", 19, "bold"), width=170, anchor="n").grid(row=0, column=3, padx=(10, 20), pady=5)
 
     def _add_patient_buttons(self, patient_frame, patient, idx):
         """Adds the 'Attend' and 'Edit' buttons for each patient."""
