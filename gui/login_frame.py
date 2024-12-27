@@ -71,6 +71,19 @@ class LoginFrame(CTkFrame):
         login_btn.pack(padx=2, pady=5, anchor="w")
         exit_btn.pack(padx=2, pady=5, anchor="w")
 
+        
+        self.display_button = CTkButton(
+            self,
+            text="display",
+            command=self.switch_to_display,
+            fg_color="navy",
+            bg_color="navy",
+        )
+        self.display_button.pack(side="bottom", fill="both", expand=True)
+
+    def switch_to_display(self):
+        self.parent.frame_manager.switch_to("display")
+
     def login_confirm(self):
         username = self.user_entry.get()
         password = self.password_entry.get()

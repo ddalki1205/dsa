@@ -81,8 +81,22 @@ class DisplayFrame(CTkFrame):
 
         # Footer Frame
         self.footer_frame = CTkFrame(self, fg_color="white")
-        self.footer_frame.pack(pady=10, side="bottom", fill="x")
+        self.footer_frame.pack(pady=10)
 
         # Footer Text
         self.footer_label = CTkLabel(self.footer_frame, text="@ 2024 Public Medical Hospital Institute. All Rights Reserved", text_color="#14375e", font=("Segoe UI", 16), justify="center")
         self.footer_label.pack(padx=20)
+
+        self.display_button = CTkButton(
+            self,
+            text="login",
+            command=self.switch_to_login,
+            fg_color="navy",
+            height=10000,
+            width=75,
+            bg_color="navy",
+        )
+        self.display_button.place(relx=.97, rely=0.5, anchor="center")
+    
+    def switch_to_login(self):
+        self.parent.frame_manager.switch_to("login")
