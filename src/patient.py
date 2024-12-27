@@ -3,10 +3,10 @@ class Patient:
     params:
     - name: str = name of the patient
     - severity: int = starting with 1 indicating low severity, e.g, low priority
-    - arrival_time: int = global counter starting with 0 from hospital queue
+    - arrival_time: str = datetime object of when the patient arrives
     - line_number: int = patient's position in the queue
     '''
-    def __init__(self, name: str, severity: int, arrival_time: int, line_number: int):
+    def __init__(self, name: str, severity: int, arrival_time: object, line_number: int):
         self.name: str = name
         self.severity: int = severity
         self.arrival_time: int = arrival_time

@@ -1,5 +1,6 @@
 import heapq
 from .patient import Patient
+from datetime import datetime
 
 class HospitalQueue:
     """
@@ -7,15 +8,14 @@ class HospitalQueue:
     """
     def __init__(self):
         self.queue = []  # The internal priority queue
-        self.counter = 0  # Global counter for arrival time
 
     def add_patient(self, name, severity):
         """
         Add a patient to the queue, with an auto-incremented arrival time.
         After adding the patient, assign their line number based on their position in the queue.
         """
-        self.counter += 1
-        patient = Patient(name, severity, self.counter, 0)  # Initial line_number is set to 0 temporarily
+        arrival_time = datetime.now()
+        patient = Patient(name, severity, arrival_time, 0)  # Initial line_number is set to 0 temporarily
         heapq.heappush(self.queue, (patient.get_priority(), patient))
         self._assign_line_numbers()  # Assign line numbers based on the queue position
         print(f"Patient added: {patient}")
@@ -45,9 +45,9 @@ class HospitalQueue:
         """
         Find a patient by name. Return the patient or None.
         """
-        for _, patient in enumerate(self.queue):
-            if patient[1].name == name:
-                return patient[1]
+        for _, patient in self.queue:
+            if patient.name == name:
+                return patient
         print(f"Error: Patient '{name}' not found.")
         return None
 
@@ -63,21 +63,25 @@ class HospitalQueue:
         temp_queue = sorted(self.queue, key=lambda x: x[0])  # Sort by priority
         for _, patient in temp_queue:
             print(f"\t{patient}")
-    def get_patients(self) -> list[object]:
+
+    def get_patients(self) -> list:
         """
         Returns an array of patients in order based on highest to lowest priority
         """
         if not self.queue:
             return None
         temp_queue = sorted(self.queue, key=lambda x: x[0])
+        patients = []
         for _, patient in temp_queue:
-            print(f"\t{patient}")
+            patients.append(patient)
+        return patients
+    
     def _reinsert_patient(self, patient, new_severity):
         """
         Helper function to update the severity and reinsert a patient into the queue.
         """
-        # Remove old entry
-        self.queue = [(priority, p) for priority, p in self.queue if p[1] != patient]
+        # Remove old entry by filtering out the patient
+        self.queue = [(priority, p) for priority, p in self.queue if p != patient]
         heapq.heapify(self.queue)
 
         # Update severity and reinsert
@@ -85,7 +89,6 @@ class HospitalQueue:
         heapq.heappush(self.queue, (patient.get_priority(), patient))
         self._assign_line_numbers()  # Reassign line numbers after re-insertion
         print(f"Updated severity for {patient.name} to {new_severity}")
-
 
     def _assign_line_numbers(self):
         """
