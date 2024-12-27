@@ -63,11 +63,7 @@ class DisplayFrame(CTkFrame):
         # Login Button
         self.display_button = CTkButton(
             self,
-<<<<<<< HEAD
             text="",
-=======
-            text="Login",
->>>>>>> bd275b39a472c1a4b6f26ae6b0e247d726b4ae94
             command=self.switch_to_login,
             fg_color="#14375e",
             height=10000,
@@ -75,10 +71,6 @@ class DisplayFrame(CTkFrame):
             bg_color="#14375e",
             anchor="s"
         )
-<<<<<<< HEAD
-        self.display_button.place(relx=0.02, rely=0.5, anchor="center")
-    
-=======
         self.display_button.place(relx=0.97, rely=0.5, anchor="center")
 
     def update_content(self):
