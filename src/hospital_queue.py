@@ -63,7 +63,15 @@ class HospitalQueue:
         temp_queue = sorted(self.queue, key=lambda x: x[0])  # Sort by priority
         for _, patient in temp_queue:
             print(f"\t{patient}")
-            
+    def get_patients(self) -> list[object]:
+        """
+        Returns an array of patients in order based on highest to lowest priority
+        """
+        if not self.queue:
+            return None
+        temp_queue = sorted(self.queue, key=lambda x: x[0])
+        for _, patient in temp_queue:
+            print(f"\t{patient}")
     def _reinsert_patient(self, patient, new_severity):
         """
         Helper function to update the severity and reinsert a patient into the queue.
