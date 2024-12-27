@@ -24,6 +24,17 @@ class AdminFrame(CTkFrame):
         self.title_frame = CTkFrame(self, fg_color="#14375e", corner_radius=0)
         self.title_frame.pack(fill="both", pady=0)
 
+        # Logout Button
+        self.logout_button = CTkButton(
+            self.title_frame,
+            text="Logout",
+            font=("Segoe UI", 16, "bold"),
+            fg_color="#ff4d4d",
+            hover_color="#cc0000",
+            command=self.logout
+        )
+        self.logout_button.pack(side="right", padx=(0, 20), pady=10)
+
         # Hospital Logo
         self.logo_pil = Image.open("gui/images/hospital-logo.png") 
         self.logo_pil = self.logo_pil.resize((50, 50))
@@ -253,3 +264,8 @@ class AdminFrame(CTkFrame):
             width=5
         )
         edit_button.grid(row=0, column=5, padx=(30,2), pady=5)
+
+
+    def logout(self):
+        """Handles logging out by switching to the login frame."""
+        self.parent.frame_manager.switch_to("login")
