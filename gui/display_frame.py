@@ -1,20 +1,22 @@
 import customtkinter as ctk
 from PIL import Image, ImageTk
 
-class HospitalDisplayApp(ctk.CTk):
+class DisplayFrame(ctk.CTk):
     SCALING = 1.5
     MAX_PER_COLUMN = 10
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent, hospital_queue):
+        super().__init__(parent.root)
         self.title("Hospital Waiting Room Display")
         self.configure(fg_color="white")
+        self.hospital_queue = hospital_queue
+        self.parent = parent
 
         screen_w = self.winfo_screenwidth()
         screen_h = self.winfo_screenheight()
 
-        root_w = int(screen_w // HospitalDisplayApp.SCALING)
-        root_h = int(screen_h // HospitalDisplayApp.SCALING)
+        root_w = int(screen_w // DisplayFrame.SCALING)
+        root_h = int(screen_h // DisplayFrame.SCALING)
 
         root_resolution = f"{root_w}x{root_h}"
 
@@ -60,13 +62,12 @@ class HospitalDisplayApp(ctk.CTk):
         self.now_preparing_label = ctk.CTkLabel(self.now_preparing_frame, text="IN LINE", text_color="#14375e", font=("SF Pro Display", 39))
         self.now_preparing_label.grid(row=0, column=0, columnspan=2, padx=20, pady=5)
 
-        #dummy data
-        preparing_numbers = ["112", "114", "115", "117", "118", "120", "122", "123", "124", "126", 
-                             "128", "130", "131", "133", "134", "135", "136", "137", "138", "139"]
+        patients = self.hospital_queue.get_patients()
+        preparing_numbers = [patient.line_number for patient in patients]
 
         # Divide numbers into columns
-        col_1 = "\n".join(preparing_numbers[:HospitalDisplayApp.MAX_PER_COLUMN])
-        col_2 = "\n".join(preparing_numbers[HospitalDisplayApp.MAX_PER_COLUMN:])
+        col_1 = "\n".join(preparing_numbers[DisplayFrame.MAX_PER_COLUMN])
+        col_2 = "\n".join(preparing_numbers[DisplayFrame.MAX_PER_COLUMN:])
 
         # Left Column
         self.preparing_column_1 = ctk.CTkLabel(self.now_preparing_frame, text=col_1, text_color="black", font=("Segoe UI", 30), justify="left")
@@ -82,7 +83,7 @@ class HospitalDisplayApp(ctk.CTk):
         self.now_serving_frame = ctk.CTkFrame(self.content_frame, fg_color="white")
         self.now_serving_frame.grid(row=0, column=1, sticky="e", padx=10)
 
-        self.now_serving_label = ctk.CTkLabel(self.now_serving_frame, text="NOW SERVING", text_color="green", font=("SF Pro Display", 50),)
+        self.now_serving_label = ctk.CTkLabel(self.now_serving_frame, text="ATTENDING TO", text_color="green", font=("SF Pro Display", 50),)
         self.now_serving_label.grid(row=0, column=0, padx=20, pady=5)
 
         self.serving_number_label = ctk.CTkLabel(self.now_serving_frame, text="105", text_color="green", font=("Segoe UI", 92, "bold"),)
@@ -98,6 +99,3 @@ class HospitalDisplayApp(ctk.CTk):
         self.footer_label = ctk.CTkLabel(self.footer_frame, text="Public Medical Hospital", text_color="#14375e", font=("Segoe UI", 16), justify="center")
         self.footer_label.pack(padx=20)
 
-if __name__ == "__main__":
-    app = HospitalDisplayApp()
-    app.mainloop()
