@@ -38,11 +38,11 @@ class LoginFrame(ctk.CTkFrame):
         self.username_frame.pack(pady=10, anchor="w")
 
         # Username label and entry
-        self.id_label = ctk.CTkLabel(self.username_frame, text="Username:", text_color="black", bg_color="white", font=("Segoe UI", 16))
-        self.id_label.pack(side="left", padx=5)
+        self.user_label = ctk.CTkLabel(self.username_frame, text="Username:", text_color="black", bg_color="white", font=("Segoe UI", 16))
+        self.user_label.pack(side="left", padx=5)
 
-        self.id_entry = ctk.CTkEntry(self.username_frame, text_color="black", bg_color="white", fg_color="white", font=("Segoe UI", 16), width=250)
-        self.id_entry.pack(side="left", padx=5)
+        self.user_entry = ctk.CTkEntry(self.username_frame, text_color="black", bg_color="white", fg_color="white", font=("Segoe UI", 16), width=250)
+        self.user_entry.pack(side="left", padx=5)
 
         # Password frame
         self.password_frame = ctk.CTkFrame(self.login_form, bg_color="white", fg_color="white")
