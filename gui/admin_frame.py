@@ -1,4 +1,5 @@
 from customtkinter import *
+from PIL import Image, ImageOps, ImageDraw
 import random
 
 class AdminFrame(CTkFrame):
@@ -45,17 +46,6 @@ class AdminFrame(CTkFrame):
             header_label = CTkLabel(self.header_frame, text=header, width=150, anchor="w")
             header_label.grid(row=0, column=idx, padx=10, pady=5)
 
-    def _edit_patient_severity(self, patient):
-        """Opens a popup to edit the severity of a patient."""
-        # Close any existing popup
-        if self.popup_frame is not None:
-            self.popup_frame.place_forget()
-
-        self.popup_frame = CTkFrame(self, fg_color="gray", corner_radius=10, width=400, height=200)
-        self.popup_frame.place(relx=0.5, rely=0.5, anchor="center")
-
-        # Create input form for new severity
-        self._create_severity_form(patient)
 
     def _create_severity_form(self, patient):
         """Creates a form in the popup to input new severity."""
@@ -69,11 +59,17 @@ class AdminFrame(CTkFrame):
                 print("Please enter a valid severity value")
 
         # Create popup form fields
-        CTkLabel(self.popup_frame, text=f"Enter new severity for {patient.name}:").pack(pady=10)
+        CTkLabel(self.popup_frame, text=f"Enter new severity for {patient.name}:").pack(pady=(40, 20))
         self.severity_input = CTkEntry(self.popup_frame)
         self.severity_input.pack(pady=10)
         CTkButton(self.popup_frame, text="Submit", command=submit_new_severity).pack(pady=10)
-        CTkButton(self.popup_frame, text="X", width=30, height=30, command=self.popup_frame.place_forget).place(relx=0.95, rely=0.05)
+        CTkButton(
+            self.popup_frame,
+            text="X", 
+            width=30, height=30, 
+            command=self.popup_frame.place_forget, 
+            fg_color="red",
+            ).place(relx=0.75, rely=0.05)
 
     def _attend_to_patient(self):
         """Attends to the first patient in the queue."""
@@ -84,6 +80,18 @@ class AdminFrame(CTkFrame):
             self.hospital_queue.remove_patient()
             self._update_table()
 
+    def _edit_patient_severity(self, patient):
+        """Opens a popup to edit the severity of a patient."""
+        # Close any existing popup
+        if self.popup_frame is not None:
+            self.popup_frame.place_forget()
+
+        self.popup_frame = CTkFrame(self, fg_color="gray", bg_color="gray", corner_radius=10, width=400, height=300)
+        self.popup_frame.place(relx=0.5, rely=0.5, anchor="center")
+
+        # Create input form for new severity
+        self._create_severity_form(patient)
+        
     def _update_table(self):
         """Updates the patient table with the current queue data."""
         # Clear existing rows in scrollable frame
@@ -116,9 +124,27 @@ class AdminFrame(CTkFrame):
         """Adds the 'Attend' and 'Edit' buttons for each patient."""
         # Add "Attend" button for the first patient in the queue
         if idx == 0:
-            attend_button = CTkButton(patient_frame, text="Attend", command=self._attend_to_patient)
+            attend_button = CTkButton(
+                patient_frame, 
+                text="",
+                command=self._attend_to_patient,
+                image=CTkImage(
+                    light_image=Image.open(f"gui/images/attend.png"),
+                    size=(50, 50)
+                ),
+                fg_color="transparent",
+            )
             attend_button.grid(row=0, column=4, padx=10, pady=5)
 
         # Add "Edit" button for all patients
-        edit_button = CTkButton(patient_frame, text="Edit", command=lambda p=patient: self._edit_patient_severity(p))
+        edit_button = CTkButton(
+            patient_frame,
+            text="",
+            command=lambda p=patient: self._edit_patient_severity(p),
+            image=CTkImage(
+                    light_image=Image.open(f"gui/images/edit.png"),
+                    size=(50, 50)
+                ),
+            fg_color="transparent",
+        )
         edit_button.grid(row=0, column=5, padx=10, pady=5)
