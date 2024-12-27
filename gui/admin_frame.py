@@ -1,7 +1,6 @@
-from CTkScrollableDropdown import CTkScrollableDropdown
 from customtkinter import *
 from PIL import Image, ImageTk, ImageOps, ImageDraw
-from CTkScrollableDropdown import *
+from .CTkScrollableDropdown import *
 import random
 
 class AdminFrame(CTkFrame):
