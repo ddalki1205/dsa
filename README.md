@@ -1,13 +1,7 @@
-# Hospital Patient Queue System
+# Hospital Queue System
 
 ## Project Proposal
-
-### Hospital Patient Queue System for Public Hospital
-
-### Description
-This project aims to address common challenges in hospitals, such as long waiting times and inefficient patient tracking, by implementing a dynamic priority-based queue system. The system ensures that patients with critical conditions are attended to first, improving hospital efficiency and patient care.
-
----
+> This project aims to address common challenges in hospitals, such as long waiting times and inefficient patient tracking, by implementing a dynamic priority-based queue system. The system ensures that patients with critical conditions are attended to first, improving hospital efficiency and patient care.
 
 ## Key Components
 
@@ -24,8 +18,6 @@ This project aims to address common challenges in hospitals, such as long waitin
 #### 3. Heap Implementation
 - **Purpose**: Efficiently implement the priority queue for large numbers of patients.
 - **Advantages**: Supports fast insertion, deletion, and reordering, ensuring the highest-priority patient is always at the top.
-
----
 
 ## Expected Functionality
 
@@ -65,25 +57,20 @@ This project aims to address common challenges in hospitals, such as long waitin
   - Incorrect severity levels
 - Notify staff of errors or when attempting to process an empty queue.
 
-### 7. User-Friendly Interface
-- Provide a simple and intuitive interface for hospital staff to:
-  - Manage patients
-  - View the queue
-  - Add, remove, or update patient details
+## Prerequisites
+- [Python](https://www.python.org/downloads/) (version 3.13 above)
 
-### 8. Scalability
-- Efficiently handle large numbers of patients without performance issues.
-- Ensure smooth operation regardless of queue size.
+## Installation
 
----
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/ddalki1205/hospital-queue-system
+    ```
 
-## Deliverables
-
-1. **Fully Functional System**
-   - Includes all specified functionalities.
-2. **Comprehensive Documentation**
-   - Code structure and implementation details.
-   - Step-by-step instructions for installation and usage.
-3. **Test Cases**
-   - Demonstrates the correctness and efficiency of all functionalities.
-
+2. Navigate to the project directory:
+    ```bash
+    cd hospital-queue-system
+    ```
+3. Install dependencies:
+    ```bash
+    pip install -r requirements.txt
