@@ -67,4 +67,4 @@ class LoginFrame(ctk.CTkFrame):
         exit_btn.pack(padx=2, pady=5, anchor="w")
 
     def login_confirm(self):
-            pass
+        pass
