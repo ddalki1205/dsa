@@ -3,6 +3,11 @@ from PIL import Image, ImageTk, ImageOps, ImageDraw
 from .CTkScrollableDropdown import *
 import random
 
+from customtkinter import *
+from PIL import Image, ImageTk, ImageOps, ImageDraw
+from .CTkScrollableDropdown import *
+import random
+
 class AdminFrame(CTkFrame):
     def __init__(self, parent, hospital_queue):
         super().__init__(parent.root, fg_color="white", bg_color="white")
@@ -15,8 +20,6 @@ class AdminFrame(CTkFrame):
         # Popup frame to edit patient severity
         self.popup_frame = None
 
-#-----------------------------------------------------------------------------------------------------
-
         # Title Frame
         self.title_frame = CTkFrame(self, fg_color="#14375e", corner_radius=0)
         self.title_frame.pack(fill="both", pady=0)
@@ -27,7 +30,7 @@ class AdminFrame(CTkFrame):
         self.logo_img = ImageTk.PhotoImage(self.logo_pil)
 
         self.logo_label = CTkLabel(self.title_frame, image=self.logo_img, text="")
-        self.logo_label.pack(side="left", padx=(30,5), pady=5)
+        self.logo_label.pack(side="left", padx=(30, 5), pady=5)
 
         self.title_label = CTkLabel(self.title_frame, text="Public Medical Hospital (Admin)", text_color="white", font=("Segoe UI", 30, "bold"))
         self.title_label.pack(fill="both", side="left", pady=7)
@@ -39,21 +42,37 @@ class AdminFrame(CTkFrame):
         self.add_label = CTkLabel(self.content_frame, text="Add Patient", text_color="black", font=("SF Pro Display", 30, "bold"))
         self.add_label.pack(anchor="w", padx=50, pady=20)
 
-        # name label and entry
+        # Name label and entry
         self.add_label = CTkLabel(self.content_frame, text="Patient Name:", text_color="black", font=("Segoe UI", 20, "bold"))
-        self.add_label.pack(anchor="w", padx=50, pady=(0,10))
+        self.add_label.pack(anchor="w", padx=50, pady=(0, 10))
 
         self.add_entry = CTkEntry(self.content_frame, text_color="black", bg_color="white", fg_color="white", font=("Segoe UI", 16), width=250, height=30)
         self.add_entry.pack(anchor="w", padx=50)
 
-        # Scrollable dropdown for severity
-        severity_button = CTkButton(self.content_frame, text="Choose Severity", font=("Segoe UI", 16, "bold"), width=250, height=6, border_spacing=5)
-        severity_button.pack(padx=50, pady=(15, 0), anchor="w")
+        # Severity dropdown using CTkOptionMenu and CTkScrollableDropdown
+        self.severity_dropdown_menu = CTkOptionMenu(
+            self.content_frame,
+            values=[str(i) for i in range(1, 11)],
+            font=("Segoe UI", 16, "bold"),
+            width=250,
+            height=40
+        )
+        self.severity_dropdown_menu.pack(padx=50, pady=(5, 0), anchor="w")
 
-        add_btn = CTkButton(self.content_frame, text="Add Patient", font=("Segoe UI", 16, "bold"), width=150, height=10, border_spacing=10, command="")
-        add_btn.pack(padx=50, pady=(15,0), anchor="w")
+        CTkScrollableDropdown(self.severity_dropdown_menu, values=[str(i) for i in range(1, 11)])
 
-#-----------------------------------------------------------------------------------------------------
+
+        # Add Patient Button
+        add_btn = CTkButton(
+            self.content_frame,
+            text="Add Patient",
+            font=("Segoe UI", 16, "bold"),
+            width=150,
+            height=10,
+            border_spacing=10,
+            command=self._on_add_patient
+        )
+        add_btn.pack(padx=50, pady=(15, 0), anchor="w")
 
         # Create header frame
         self.header_frame = CTkFrame(self, fg_color="#14375e")
@@ -66,6 +85,47 @@ class AdminFrame(CTkFrame):
 
         # Update table with current data
         self._update_table()
+
+    def _on_add_patient(self):
+        """Handles adding a patient from the UI inputs."""
+        name = self.add_entry.get().strip()
+        severity = self.severity_dropdown_menu.get().strip()  # Use the dropdown's selected value
+
+        if not name:
+            print("Error: Patient Name cannot be empty.")
+            return
+
+        if not severity.isdigit():
+            print("Error: Severity must be a number.")
+            return
+
+        severity = int(severity)
+
+        # Add the patient
+        self.hospital_queue.add_patient(name, severity)
+
+        # Clear inputs
+        self.add_entry.delete(0, "end")
+
+        # Refresh table
+        self._update_table()
+
+        print(f"Patient '{name}' added with severity '{severity}'.")
+
+    def _add_initial_patients(self):
+        """Adds some sample patients to the queue."""
+        # Sample names for random patient generation
+        names = [
+            "Jackson", "James", "Sophia", "Liam", "Emma", "Oliver", "Ava", 
+            "Lucas", "Mia", "Noah", "Isabella", "Elijah", "Zoe", "Aiden", "Amelia"
+        ]
+
+        # Randomly generate patients and add them to the hospital queue
+        for name in random.sample(names, 15):  # Ensure unique names
+            severity = random.randint(1, 10)  # Random severity between 1 and 10
+            self.hospital_queue.add_patient(name=name, severity=severity)
+
+    # Rest of your methods (_create_table_headers, _update_table, etc.) remain unchanged
 
     def _add_initial_patients(self):
         """Adds some sample patients to the queue."""
