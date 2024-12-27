@@ -12,6 +12,12 @@ class Patient:
         self.arrival_time: int = arrival_time
         self.line_number: int = line_number
 
+    def __lt__(self, other):
+        """Define the less-than comparison for sorting by severity (lower severity first)."""
+        if isinstance(other, Patient):
+            return self.severity < other.severity
+        return NotImplemented
+
     def get_line_number(self) -> int:
         '''
         Returns the line number as an integer.
