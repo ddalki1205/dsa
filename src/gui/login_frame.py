@@ -11,11 +11,11 @@ class LoginFrame(ctk.CTkFrame):
     def create_widgets(self):
         # log in frame
         self.main_frame = ctk.CTkFrame(self, fg_color="white")
-        self.main_frame.pack(pady=80)
+        self.main_frame.pack(side="left", padx=200)
 
         # logo frame
         self.logo_frame = ctk.CTkFrame(self.main_frame, fg_color="white")
-        self.logo_frame.pack(side="left", padx=20)
+        self.logo_frame.pack(side="left", padx=0)
 
         # Logo image (use Pillow to load the image)
         self.logo_pil = Image.open("app/images/hospital-logo.png")
@@ -23,7 +23,7 @@ class LoginFrame(ctk.CTkFrame):
         self.logo_img = ImageTk.PhotoImage(self.logo_pil)
 
         self.logo_label = ctk.CTkLabel(self.logo_frame, image=self.logo_img, text="", fg_color="white")
-        self.logo_label.pack(side="left", pady=70, padx=5)
+        self.logo_label.pack(side="left", pady=0)
 
         # login form frame
         self.login_form = ctk.CTkFrame(self.main_frame, fg_color="white")
