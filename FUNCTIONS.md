@@ -5,7 +5,7 @@
 public functions for the hospital queue available to be used
 
 > [!IMPORTANT]
-> Severity is based on a scale of 1-10
+> Severity is based on a scale of 1-10,
 > 1 being the lowest severity and priority
 
 - **add_patient(name, severity)**:
