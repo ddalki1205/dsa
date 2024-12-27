@@ -1,4 +1,5 @@
 from customtkinter import *
+from PIL import Image, ImageTk
 from PIL import Image, ImageOps, ImageDraw
 import random
 
@@ -13,6 +14,29 @@ class AdminFrame(CTkFrame):
 
         # Popup frame to edit patient severity
         self.popup_frame = None
+
+        #-----------------------------------------------------------------------------------------------------
+
+        # Title Frame
+        self.title_frame = CTkFrame(self, fg_color="red")
+        self.title_frame.pack(pady=10)
+
+        # Hospital Logo
+        self.logo_pil = Image.open("gui/images/hospital-logo.png") 
+        self.logo_pil = self.logo_pil.resize((50, 50))
+        self.logo_img = ImageTk.PhotoImage(self.logo_pil)
+
+        self.logo_label = CTkLabel(self.title_frame, image=self.logo_img, text="")
+        self.logo_label.pack(side="left", padx=10)
+
+        self.title_label = CTkLabel(self.title_frame, text="Public Medical Hospital (Admin)", text_color="#14375e", font=("Segoe UI", 30, "bold"))
+        self.title_label.pack(pady=7)
+
+        # Content Frame
+        self.content_frame = CTkFrame(self, fg_color="white")
+        self.content_frame.pack(fill="both", expand=True, padx=20, pady=10)
+
+#-----------------------------------------------------------------------------------------------------
 
         # Create header frame
         self.header_frame = CTkFrame(self)
@@ -38,6 +62,8 @@ class AdminFrame(CTkFrame):
         for name in random.sample(names, 15):  # Ensure unique names
             severity = random.randint(1, 10)  # Random severity between 1 and 10
             self.hospital_queue.add_patient(name=name, severity=severity)
+
+#-----------------------------------------------------------------------------------------------------
 
     def _create_table_headers(self):
         """Creates the header row for the patient table."""
