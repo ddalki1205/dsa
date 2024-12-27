@@ -67,7 +67,7 @@ class AdminFrame(CTkFrame):
 
     def _create_table_headers(self):
         """Creates the header row for the patient table."""
-        headers = ["Line Number", "Name", "Severity", "Arrival Time", "Actions"]
+        headers = ["Patient ID", "Name", "Severity", "Arrival Time", "Actions"]
         for idx, header in enumerate(headers):
             header_label = CTkLabel(self.header_frame, text=header, width=150, anchor="w")
             header_label.grid(row=0, column=idx, padx=10, pady=5)
@@ -141,7 +141,7 @@ class AdminFrame(CTkFrame):
 
     def _add_patient_labels(self, patient_frame, patient):
         """Adds labels for the patient information in a row."""
-        CTkLabel(patient_frame, text=str(patient.line_number), width=150, anchor="w").grid(row=0, column=0, padx=10, pady=5)
+        CTkLabel(patient_frame, text=str(patient.patient_id), width=150, anchor="w").grid(row=0, column=0, padx=10, pady=5)
         CTkLabel(patient_frame, text=patient.name, width=150, anchor="w").grid(row=0, column=1, padx=10, pady=5)
         CTkLabel(patient_frame, text=str(patient.severity), width=150, anchor="w").grid(row=0, column=2, padx=10, pady=5)
         CTkLabel(patient_frame, text=patient.arrival_time, width=150, anchor="w").grid(row=0, column=3, padx=10, pady=5)
