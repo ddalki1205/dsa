@@ -20,12 +20,14 @@ class LoginFrame(ctk.CTkFrame):
         self.logo_frame = ctk.CTkFrame(self.main_frame, fg_color="white")
         self.logo_frame.pack(side="left", padx=0)
 
-        # Logo image (use Pillow to load the image)
-        self.logo_pil = Image.open("gui/images/hospital-logo.png")
-        self.logo_pil = self.logo_pil.resize((350, 350))
-        self.logo_img = ImageTk.PhotoImage(self.logo_pil)
-
-        self.logo_label = ctk.CTkLabel(self.logo_frame, image=self.logo_img, text="", fg_color="white")
+        self.logo_label = ctk.CTkLabel(
+            self.logo_frame,
+            image=ctk.CTkImage(
+                light_image=Image.open(f"gui/images/hospital-logo.png"),
+                size=(350, 350)
+            ), 
+            text="", fg_color="white"
+        )
         self.logo_label.pack(side="left", pady=0)
 
         # login form frame
