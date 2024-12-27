@@ -29,12 +29,14 @@ class DisplayFrame(CTkFrame):
         self.title_label = CTkLabel(self.title_frame, text="Hospital Waiting Room", text_color="#14375e", font=("Segoe UI", 50, "bold"))
         self.title_label.pack(pady=7)
 
+#-----------------------------------------------------------------------------------------------------
+
         # Content Frame
         self.content_frame = CTkFrame(self, fg_color="white")
         self.content_frame.pack(fill="both", expand=True, padx=20, pady=10)
 
         # Now Preparing Frame (Left Side)
-        self.now_preparing_frame = CTkFrame(self.content_frame, fg_color="white", width=500, height=540)
+        self.now_preparing_frame = CTkFrame(self.content_frame, fg_color="white", width=500, height=520)
         self.now_preparing_frame.grid(row=0, column=0, sticky="w", padx=70, pady=0)
         self.now_preparing_frame.grid_propagate(False)
 
@@ -59,9 +61,11 @@ class DisplayFrame(CTkFrame):
         self.preparing_column_2 = CTkLabel(self.now_preparing_frame, text=col_2, text_color="black", font=("Segoe UI", 30), justify="left")
         self.preparing_column_2.grid(row=1, column=1, padx=10, pady=5)
 
+#-----------------------------------------------------------------------------------------------------
+
         # Now Serving Frame (Right Side)
         self.now_serving_frame = CTkFrame(self.content_frame, fg_color="white")
-        self.now_serving_frame.grid(row=0, column=1, sticky="e", padx=10)
+        self.now_serving_frame.grid(row=0, column=1, sticky="e", padx=5)
 
         self.now_serving_label = CTkLabel(self.now_serving_frame, text="ATTENDING TO", text_color="green", font=("SF Pro Display", 50))
         self.now_serving_label.grid(row=0, column=0, padx=20, pady=5)
@@ -73,10 +77,12 @@ class DisplayFrame(CTkFrame):
                                                  text_color="green", font=("Segoe UI", 92, "bold"))
             self.serving_number_label.grid(row=1, column=0, padx=20, pady=5)
 
+#-----------------------------------------------------------------------------------------------------
+
         # Footer Frame
         self.footer_frame = CTkFrame(self, fg_color="white")
         self.footer_frame.pack(pady=10, side="bottom", fill="x")
 
         # Footer Text
-        self.footer_label = CTkLabel(self.footer_frame, text="Public Medical Hospital", text_color="#14375e", font=("Segoe UI", 16), justify="center")
+        self.footer_label = CTkLabel(self.footer_frame, text="@ 2024 Public Medical Hospital Institute. All Rights Reserved", text_color="#14375e", font=("Segoe UI", 16), justify="center")
         self.footer_label.pack(padx=20)
