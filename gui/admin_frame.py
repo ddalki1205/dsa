@@ -29,11 +29,13 @@ class AdminFrame(CTkFrame):
             self.title_frame,
             text="Logout",
             font=("Segoe UI", 16, "bold"),
-            fg_color="#ff4d4d",
-            hover_color="#cc0000",
+            text_color="white",
+            fg_color="#0b1b36",
+            hover_color="#f80505",
+            width=18,
             command=self.logout
         )
-        self.logout_button.pack(side="right", padx=(0, 20), pady=10)
+        self.logout_button.pack(side="right", padx=(0, 15), pady=10)
 
         # Hospital Logo
         self.logo_pil = Image.open("gui/images/hospital-logo.png") 
