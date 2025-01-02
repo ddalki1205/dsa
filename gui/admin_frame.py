@@ -32,7 +32,7 @@ class AdminFrame(CTkFrame):
             text_color="white",
             fg_color="#0b1b36",
             hover_color="#f80505",
-            width=18,
+            width=20,
             command=self.logout
         )
         self.logout_button.pack(side="right", padx=(0, 15), pady=10)
